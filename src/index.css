@@ -7,7 +7,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.card{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  width: 50%;
+}
+
+.card img{
+  width: 150px;
+}
+
+ul{
+  list-style: none;
 }

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class MyComponent extends React.Component {
+class Componente extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,4 +58,6 @@ class MyComponent extends React.Component {
 
 }
 
-ReactDOM.render(<MyComponent />, document.getElementById("root"));
+ReactDOM.render(
+  <Componente />,
+document.getElementById("root"));
