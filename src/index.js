@@ -19,10 +19,10 @@ class MyComponent extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result.value);
+          console.log(result);
           this.setState({
             isLoaded: true,
-            items: result.value
+            items: result
           });
         },
         // Nota: è importante gestire gli errori qui
@@ -45,9 +45,13 @@ class MyComponent extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          {items}
-        </ul>
+        <div class="card">
+          <img src={items.icon_url} />
+          <ul>
+            <li>{items.value}</li>
+          </ul>
+        </div>
+        
       );
     }
   }
