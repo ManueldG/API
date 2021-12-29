@@ -1,17 +1,57 @@
+
+//https://api.chucknorris.io/jokes/random
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+  }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  componentDidMount() {
+    fetch("https://api.chucknorris.io/jokes/random")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.value);
+          this.setState({
+            isLoaded: true,
+            items: result.value
+          });
+        },
+        // Nota: è importante gestire gli errori qui
+        // invece di un blocco catch() in modo da non fare passare
+        // eccezioni da bug reali nei componenti.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <ul>
+          {items}
+        </ul>
+      );
+    }
+  }
+
+}
+
+ReactDOM.render(<MyComponent />, document.getElementById("root"));
